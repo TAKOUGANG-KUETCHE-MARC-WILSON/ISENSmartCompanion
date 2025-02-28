@@ -155,6 +155,7 @@ fun MainScreen(navController: NavController? = null, previewMode: Boolean = fals
             }
         }
     }
+
 }
 @Preview(showBackground = true)
 @Composable

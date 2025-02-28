@@ -14,9 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ISENSmartCompanion"
         tools:targetApi="31">
+
+        <activity android:name=".activities.EventDetailActivity" />
+
+
         <activity
-            android:name=".ui.theme.SettingsActivity"
-            android:exported="false" />
+            android:name=".ui.theme.EventDetailActivity"
+            android:exported="false"
+            android:label="@string/title_activity_event_detail"
+            android:theme="@style/Theme.ISENSmartCompanion" />
+
+
         <activity android:name=".ui.theme.EventListActivity" />
         <activity
             android:name=".MainActivity"
