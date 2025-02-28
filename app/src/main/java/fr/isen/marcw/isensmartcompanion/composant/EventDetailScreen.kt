@@ -11,7 +11,7 @@ import fr.isen.marcw.isensmartcompanion.model.eventList
 
 @Composable
 fun EventDetailScreen(navController: NavController, eventId: String) {
-    val event = eventList.find { it.id == eventId }
+    val event = eventList.find { it.id.toString() == eventId }
 
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),

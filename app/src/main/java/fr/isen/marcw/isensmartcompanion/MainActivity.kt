@@ -34,9 +34,8 @@ fun AppNavigation() {
                 composable("home") { MainScreen(navController) }
                 composable("events") { EventsScreen(navController) }
                 composable("history") { HistoryScreen(navController) }
-                composable(
-                    "eventDetail/{eventId}",
-                    arguments = listOf(navArgument("eventId") { type = NavType.IntType })
+                composable("eventDetail/{eventId}",
+                    arguments = listOf(navArgument("eventId") { type = NavType.StringType }) 
                 ) { backStackEntry ->
                     val eventId = backStackEntry.arguments?.getString("eventId") ?: ""
                     EventDetailScreen(navController, eventId)

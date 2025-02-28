@@ -19,6 +19,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import fr.isen.marcw.isensmartcompanion.model.Event
 import fr.isen.marcw.isensmartcompanion.ui.theme.EventsViewModel
+import java.net.URLDecoder
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun EventsScreen(navController: NavController? = null) {
@@ -58,8 +61,8 @@ fun EventsScreen(navController: NavController? = null) {
             ) {
                 items(eventList) { event ->
                     EventItem(event = event, onClick = {
-                        navController?.navigate("eventDetail/${event.id}")
-                    })
+                        val decodedId = URLDecoder.decode(event.id, StandardCharsets.UTF_8.toString())
+                        val event = eventList.find { it.id.toString() == decodedId } })
                 }
 
             } }
