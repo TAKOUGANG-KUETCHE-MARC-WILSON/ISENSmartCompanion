@@ -1,10 +1,10 @@
-package fr.isen.marcw.isensmartcompanion.composant
+package fr.isen.marcw.isensmartcompanion.model
 
 import androidx.annotation.DrawableRes
 import fr.isen.marcw.isensmartcompanion.R
 
 data class Event(
-    val id: Int,              // Identifiant unique de l'événement
+    val id: String,              // Identifiant unique de l'événement
     val category: String,     // Catégorie de l'événement
     val title: String,        // Titre de l'événement
     val description: String,  // Description de l'événement
@@ -17,7 +17,7 @@ data class Event(
 fun getDefaultEvents(): List<Event> {
     return listOf(
         Event(
-            id = 1,
+            id = "1",
             category = "Soirée",
             title = "Soirée BDE",
             description = "Une soirée organisée par le BDE.",
@@ -26,7 +26,7 @@ fun getDefaultEvents(): List<Event> {
             imageRes = R.drawable.party
         ),
         Event(
-            id = 2,
+            id = "2",
             category = "Gala",
             title = "Gala annuel",
             description = "Le gala annuel de l'ISEN.",
@@ -35,7 +35,7 @@ fun getDefaultEvents(): List<Event> {
             imageRes = R.drawable.gala
         ),
         Event(
-            id = 3,
+            id = "3",
             category = "Cohésion",
             title = "Journée de cohésion",
             description = "Une journée pour renforcer les liens.",
@@ -44,7 +44,7 @@ fun getDefaultEvents(): List<Event> {
             imageRes = R.drawable.cohesion
         ),
         Event(
-            id = 4,
+            id = "4",
             category = "Détente",
             title = "After Work",
             description = "Un moment de détente après les cours.",
@@ -53,7 +53,7 @@ fun getDefaultEvents(): List<Event> {
             imageRes = R.drawable.after_work
         ),
         Event(
-            id = 5,
+            id = "5",
             category = "Intégration",
             title = "WEI",
             description = "Week-end d'intégration pour les nouveaux étudiants.",
@@ -62,7 +62,7 @@ fun getDefaultEvents(): List<Event> {
             imageRes = R.drawable.wei
         ),
         Event(
-            id = 6,
+            id = "6",
             category = "E-Sport",
             title = "Tournoi E-Sport",
             description = "Affrontez vos camarades sur les jeux les plus populaires.",
@@ -71,7 +71,7 @@ fun getDefaultEvents(): List<Event> {
             imageRes = R.drawable.esport
         ),
         Event(
-            id = 7,
+            id = "7",
             category = "Sport",
             title = "Sortie Ski",
             description = "Week-end de ski organisé par l’école.",
@@ -80,7 +80,7 @@ fun getDefaultEvents(): List<Event> {
             imageRes = R.drawable.ski
         ),
         Event(
-            id = 8,
+            id = "8",
             category = "Hackathon",
             title = "Hackathon ISEN",
             description = "24h de code et d’innovation en équipe !",
@@ -89,7 +89,7 @@ fun getDefaultEvents(): List<Event> {
             imageRes = R.drawable.hackathon
         ),
         Event(
-            id = 9,
+            id = "9",
             category = "Conférence",
             title = "Conférence Tech",
             description = "Intervention d’experts du numérique et de l’IA.",
@@ -107,7 +107,7 @@ val eventList = getDefaultEvents()
 
 // Fonction pour convertir un EventDto en Event avec une image par défaut
 fun EventDto.toEvent(): Event {
-    val imageRes = when (category.lowercase()) {
+    val imageRes = when (category) {
         "soirée" -> R.drawable.party
         "gala" -> R.drawable.gala
         "Vie associative" -> R.drawable.team
@@ -124,4 +124,3 @@ fun EventDto.toEvent(): Event {
     }
     return Event(id, category, title, description, date, location, imageRes)
 }
-

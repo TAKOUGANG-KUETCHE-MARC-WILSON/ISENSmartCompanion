@@ -1,6 +1,5 @@
 package fr.isen.marcw.isensmartcompanion.composant
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,10 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import fr.isen.marcw.isensmartcompanion.composant.Event
+import fr.isen.marcw.isensmartcompanion.model.Event
 import fr.isen.marcw.isensmartcompanion.ui.theme.EventsViewModel
 
 @Composable

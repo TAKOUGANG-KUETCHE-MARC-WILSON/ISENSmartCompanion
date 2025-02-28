@@ -7,9 +7,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import fr.isen.marcw.isensmartcompanion.model.eventList
 
 @Composable
-fun EventDetailScreen(navController: NavController, eventId: Int) {
+fun EventDetailScreen(navController: NavController, eventId: String) {
     val event = eventList.find { it.id == eventId }
 
     Column(

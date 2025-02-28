@@ -1,5 +1,6 @@
 package fr.isen.marcw.isensmartcompanion.composant
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import fr.isen.marcw.isensmartcompanion.model.Event
 import fr.isen.marcw.isensmartcompanion.ui.theme.EventsViewModel
 
 @Composable
@@ -24,8 +26,10 @@ fun EventsScreen(navController: NavController? = null) {
     val eventList by viewModel.events.collectAsState()
 
     LaunchedEffect(Unit) {
+        Log.d("EventsScreen", "fetchEvents() est appelée")
         viewModel.fetchEvents()
     }
+
 
     Column(
         modifier = Modifier
@@ -39,17 +43,26 @@ fun EventsScreen(navController: NavController? = null) {
             color = Color(0xFFD32F2F),
             modifier = Modifier.padding(8.dp)
         )
+        if (eventList.isEmpty()) {
+            // Afficher un message si aucun événement n'est disponible
+            Text(
+                text = "Aucun événement disponible.",
+                fontSize = 16.sp,
+                color = Color.Gray,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(eventList) { event ->
+                    EventItem(event = event, onClick = {
+                        navController?.navigate("eventDetail/${event.id}")
+                    })
+                }
 
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(eventList) { event ->
-                EventItem(event = event, onClick = {
-                    navController?.navigate("eventDetail/${event.id}")
-                })
-            }
-        }
+            } }
     }
 }
 

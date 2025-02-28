@@ -38,9 +38,10 @@ fun AppNavigation() {
                     "eventDetail/{eventId}",
                     arguments = listOf(navArgument("eventId") { type = NavType.IntType })
                 ) { backStackEntry ->
-                    val eventId = backStackEntry.arguments?.getInt("eventId") ?: -1
+                    val eventId = backStackEntry.arguments?.getString("eventId") ?: ""
                     EventDetailScreen(navController, eventId)
                 }
+
             }
         }
     }

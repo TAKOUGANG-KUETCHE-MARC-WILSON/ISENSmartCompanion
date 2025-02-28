@@ -2,8 +2,8 @@ package fr.isen.marcw.isensmartcompanion.ui.theme
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import fr.isen.marcw.isensmartcompanion.composant.Event
-import fr.isen.marcw.isensmartcompanion.composant.toEvent
+import fr.isen.marcw.isensmartcompanion.model.Event
+import fr.isen.marcw.isensmartcompanion.model.toEvent
 import fr.isen.marcw.isensmartcompanion.service.EventApiService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

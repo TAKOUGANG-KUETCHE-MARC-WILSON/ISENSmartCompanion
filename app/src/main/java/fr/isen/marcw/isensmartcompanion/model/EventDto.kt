@@ -1,7 +1,7 @@
-package fr.isen.marcw.isensmartcompanion.composant
+package fr.isen.marcw.isensmartcompanion.model
 
 data class EventDto(
-    val id: Int,
+    val id: String,
     val category: String,
     val title: String,
     val description: String,

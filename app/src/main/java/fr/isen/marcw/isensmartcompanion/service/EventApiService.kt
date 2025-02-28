@@ -1,6 +1,6 @@
 package fr.isen.marcw.isensmartcompanion.service
 
-import fr.isen.marcw.isensmartcompanion.composant.EventDto
+import fr.isen.marcw.isensmartcompanion.model.EventDto
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
