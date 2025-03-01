@@ -11,7 +11,8 @@ data class Event(
     val description: String,  // Description de l'événement
     val date: String,         // Date de l'événement
     val location: String,     // Lieu de l'événement
-    @DrawableRes val imageRes: Int // Ressource drawable pour l'image associée
+    @DrawableRes val imageRes: Int,// Ressource drawable pour l'image associée
+    var isNotified: Boolean = false
 ) : Serializable
 
 // Fonction pour récupérer les événements par défaut

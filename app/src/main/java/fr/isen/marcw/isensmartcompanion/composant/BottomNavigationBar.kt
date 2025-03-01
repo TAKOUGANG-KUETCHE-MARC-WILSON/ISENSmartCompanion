@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Event
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -20,7 +21,8 @@ fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
         NavigationItem("home", "Accueil", Icons.Default.Home),
         NavigationItem("events", "Événements", Icons.Default.Event),
-        NavigationItem("history", "Historique", Icons.Default.History)
+        NavigationItem("history", "Historique", Icons.Default.History),
+        NavigationItem("notifications", "Notifications", Icons.Default.Notifications)
     )
 
     NavigationBar(containerColor = Color.White) {

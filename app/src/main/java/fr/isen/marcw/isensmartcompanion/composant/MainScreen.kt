@@ -32,15 +32,20 @@ import fr.isen.marcw.isensmartcompanion.service.GeminiService
 import fr.isen.marcw.isensmartcompanion.ui.theme.ISENSmartCompanionTheme
 import kotlinx.coroutines.launch
 import androidx.compose.material.icons.outlined.Delete
+import fr.isen.marcw.isensmartcompanion.navigation.AppDatabase
+import fr.isen.marcw.isensmartcompanion.navigation.HistoryRepository
 
 @Composable
 fun MainScreen(navController: NavController? = null) {
     var question by remember { mutableStateOf("") }
     var messages by remember { mutableStateOf<List<Pair<String, Boolean>>>(emptyList()) }
+    var conversationContext by remember { mutableStateOf("") }
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
-
+    val database = AppDatabase.getDatabase(context)
+    val historyRepository = remember { HistoryRepository(database.historyDao()) }
+    val historyDao = database.historyDao()
     Column(
         modifier = Modifier.fillMaxSize().background(Color(0xFFFAF8FC)).padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -95,9 +100,11 @@ fun MainScreen(navController: NavController? = null) {
                         if (question.isNotBlank()) {
                             coroutineScope.launch {
                                 messages = messages + (question to true)
-                                val conversationContext = messages.joinToString("\n") { it.first }
-                                val response = GeminiService.getResponse(conversationContext + "\n" + question)
+                                val contextToUse = if (conversationContext.isNotBlank()) "$conversationContext\n$question" else question
+                                val response = GeminiService.getResponse(contextToUse)
                                 messages = messages + (response to false)
+                                conversationContext += "\n$question\n$response"
+                                historyRepository.insertHistory(question, response)
                                 question = ""
                             }
                         }
@@ -117,9 +124,11 @@ fun MainScreen(navController: NavController? = null) {
                 if (question.isNotBlank()) {
                     coroutineScope.launch {
                         messages = messages + (question to true)
-                        val conversationContext = messages.joinToString("\n") { it.first }
-                        val response = GeminiService.getResponse(conversationContext + "\n" + question)
+                        val contextToUse = if (conversationContext.isNotBlank()) "$conversationContext\n$question" else question
+                        val response = GeminiService.getResponse(contextToUse)
                         messages = messages + (response to false)
+                        conversationContext += "\n$question\n$response"
+                        historyRepository.insertHistory(question, response)
                         question = ""
                     }
                 }
@@ -131,12 +140,16 @@ fun MainScreen(navController: NavController? = null) {
         Spacer(modifier = Modifier.height(8.dp))
 
         // ✅ Bouton pour clear la conversation
-        Button(onClick = { messages = emptyList() }, colors = ButtonDefaults.buttonColors(containerColor = Color.Red)) {
+        Button(onClick = {
+            messages = emptyList()
+            conversationContext = ""
+        }, colors = ButtonDefaults.buttonColors(containerColor = Color.Red)) {
             Icon(imageVector = Icons.Outlined.Delete, contentDescription = "Effacer", tint = Color.White)
             Spacer(modifier = Modifier.width(8.dp))
             Text("Effacer la conversation", color = Color.White)
         }
     }
+
 }
 
 

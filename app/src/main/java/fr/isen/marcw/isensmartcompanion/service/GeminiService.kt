@@ -17,13 +17,19 @@ object GeminiService {
 
     suspend fun getResponse(userInput: String): String {
         return try {
+            Log.d("GeminiService", "Envoi de la requête : $userInput")
             val response = withContext(Dispatchers.IO) {
                 model.generateContent(Content(parts = listOf(TextPart(userInput))))
             }
-            response.text ?: "Aucune réponse reçue."
+            val responseText = response.text ?: "Aucune réponse reçue."
+            Log.d("GeminiService", "Réponse reçue : $responseText")
+            responseText
         } catch (e: Exception) {
-            Log.e("GeminiService", "Erreur: ${e.message}")
-            "Erreur lors de l'analyse."
+            Log.e("GeminiService", "Erreur lors de l'appel à Gemini", e)
+            "Erreur lors de l'analyse : ${e.localizedMessage}"
         }
     }
+
+
 }
+
