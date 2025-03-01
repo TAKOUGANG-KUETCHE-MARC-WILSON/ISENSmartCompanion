@@ -42,6 +42,8 @@ android {
 dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.4")
 
+    implementation("com.google.ai.client.generativeai:generativeai:0.4.0")
+
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
 

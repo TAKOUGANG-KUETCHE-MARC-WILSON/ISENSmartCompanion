@@ -48,7 +48,7 @@ fun EventsScreen(navController: NavController? = null) {
         )
         if (eventList.isEmpty()) {
             Text(
-                text = "Aucun événement disponible.",
+                text = " ",
                 fontSize = 16.sp,
                 color = Color.Gray,
                 modifier = Modifier.padding(top = 16.dp)
