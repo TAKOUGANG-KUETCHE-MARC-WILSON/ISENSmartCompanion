@@ -15,11 +15,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavType
 import androidx.navigation.compose.*
-import androidx.navigation.navArgument
 import fr.isen.marcw.isensmartcompanion.composant.BottomNavigationBar
-import fr.isen.marcw.isensmartcompanion.composant.EventDetailScreen
 import fr.isen.marcw.isensmartcompanion.composant.EventsScreen
 import fr.isen.marcw.isensmartcompanion.composant.HistoryScreen
 import fr.isen.marcw.isensmartcompanion.composant.MainScreen
@@ -31,7 +28,8 @@ import fr.isen.marcw.isensmartcompanion.navigation.HistoryViewModelFactory
 import fr.isen.marcw.isensmartcompanion.ui.theme.EventListActivity
 import android.Manifest
 import android.content.Context
-import androidx.compose.foundation.lazy.items
+import fr.isen.marcw.isensmartcompanion.composant.getDefaultCourses
+import fr.isen.marcw.isensmartcompanion.model.AgendaScreen
 import fr.isen.marcw.isensmartcompanion.ui.theme.EventsViewModel
 import fr.isen.marcw.isensmartcompanion.ui.theme.ISENSmartCompanionTheme
 
@@ -61,7 +59,13 @@ fun AppNavigation() {
 
                     NotificationsScreen(navController, notifiedEvents)
                 }
+                composable(route = "agenda") {
+                    val eventsViewModel = remember { EventsViewModel() }
+                    val events by eventsViewModel.events.collectAsState()
+                    val courses = getDefaultCourses() // Liste statique ou source dynamique pour les cours
 
+                    AgendaScreen(events = events, courses = courses)
+                }
 
             }
         }
